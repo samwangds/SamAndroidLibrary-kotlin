@@ -2,8 +2,10 @@ package wang.isam.libaray.view.clickeffect
 
 import android.view.MotionEvent
 import android.view.View
+import wang.isam.libaray.view.clickeffect.impl.DefaultClickEffectScaleAnimate
 
-class OnClickEffectTouchListener(var viewClickEffect: ViewClickEffect): View.OnTouchListener {
+class OnClickEffectTouchListener(var viewClickEffect: ViewClickEffect = DefaultClickEffectScaleAnimate()):
+        View.OnTouchListener {
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -33,4 +35,12 @@ class OnClickEffectTouchListener(var viewClickEffect: ViewClickEffect): View.OnT
         }
         return true
     }
+}
+
+/**
+ * 设置点击效果
+ * onClickEffect 默认为 DefaultClickEffectScaleAnimate 效果
+ */
+fun View.setOnClickEffect(onClickEffect: OnClickEffectTouchListener = OnClickEffectTouchListener()) {
+    this.setOnTouchListener(onClickEffect)
 }
